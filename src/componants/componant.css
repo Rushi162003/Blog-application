@@ -1,0 +1,65 @@
+.secound-nav {
+    width: 90%;
+}
+
+.logo {
+    height: 150px;
+    width: 200px;
+}
+
+.secound-nav ul li {
+    list-style-type: none;
+    display: inline;
+    margin: 10px 35px 0 35px;
+}
+
+.secound-nav ul li .link {
+    text-decoration: none;
+    color: rgb(5, 74, 114);
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.container .link {
+    text-decoration: none;
+    color: rgb(5, 74, 114);
+    font-weight: 600;
+}
+
+.carousel,
+.carousel-item img {
+    border-radius: 50px;
+    height: 550px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.blog .card{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;   
+}
+.blog .card,
+.card img {
+    border-radius: 10px;
+}
+.card-title,
+.card-text {
+    color: rgb(5, 74, 114);
+
+}
+
+/* Add Blog Css */
+.form{
+    width: 50%;
+}
+.form textarea
+{
+    border: none;
+    outline: none;
+    font-size: larger;
+    font-weight: 600;
+    color: black;
+}
+.form textarea::placeholder
+{
+    font-size: 17px;
+    font-weight: 600;
+    color: black;
+}
