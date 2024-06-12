@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 const Getblog = () => {
     const { id } = useParams();
     const context = useContext(BlogContext);
-    const { getSingleBlogId } = context;
+    const { getSingleBlogId } = context; 
     const [blog, setBlog] = useState();
     useEffect(() => {
         const fetchBlog = async () => {
