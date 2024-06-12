@@ -32,13 +32,16 @@
     height: 550px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.blog .card{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;   
+
+.blog .card {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
+
 .blog .card,
 .card img {
     border-radius: 10px;
 }
+
 .card-title,
 .card-text {
     color: rgb(5, 74, 114);
@@ -46,20 +49,32 @@
 }
 
 /* Add Blog Css */
-.form{
+.form {
     width: 50%;
 }
-.form textarea
-{
+
+.form textarea {
     border: none;
     outline: none;
     font-size: larger;
     font-weight: 600;
     color: black;
 }
-.form textarea::placeholder
-{
+
+.form textarea::placeholder {
     font-size: 17px;
     font-weight: 600;
     color: black;
+}
+
+/* Get Blogs Css */
+.description {
+    font-size: 20px;
+}
+
+.description p {
+
+    width: 1100px;
+    line-height: 30px;
+    font-weight: 550;
 }

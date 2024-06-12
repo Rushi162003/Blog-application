@@ -1,46 +1,52 @@
 import React, { useContext, useEffect } from 'react';
-import baseball from '../images/baseball.jpg';
-import BlogContext from '../context/blogs/BlogContest'; // Ensure correct import path
+import BlogContext from '../context/blogs/BlogContest';
 import './componant.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   const context = useContext(BlogContext);
   const { blogs, getBlog } = context;
   useEffect(() => {
-    getBlog();
+    if (localStorage.getItem("authToken")) {
+      // eslint-disable-next-line
+      getBlog();
+    }
+    else {
+      navigate('/login')
+    }
+
   }, []); // Empty dependency array ensures it runs once after the initial render
 
   return (
     <div className=''>
       <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          {blogs.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide-to={index}
+              className={index === 0 ? "active" : ""}
+              aria-current={index === 0 ? "true" : ""}
+              aria-label={`Slide ${index + 1}`}
+            ></button>
+          ))}
         </div>
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src={baseball} className="d-block w-100" alt="" />
-            <div className="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
+
+        <div className="carousel-inner" >
+          {blogs.map((blog, index) => (
+            <div key={blog._id} style={{ color: "black" }} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+              <img src={blog.image} style={{objectFit: "fill"}} className="d-block w-100" alt={blog.title} />
+              <div className="carousel-caption d-none d-md-block">
+                <h5>{blog.title && blog.title.length > 60 ? blog.title.substring(0, 60) : blog.title}...</h5>
+                <p>{blog.description && blog.description.length > 255 ? blog.description.substring(0, 255) : blog.description}...</p>
+              </div>
             </div>
-          </div>
-          <div className="carousel-item">
-            <img src={baseball} className="d-block w-100" alt="..." />
-            <div className="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <img src={baseball} className="d-block w-100" alt="..." />
-            <div className="carousel-caption d-none d-md-block">
-              <h5>Some sports that will be affected by big-data advances</h5>
-              <p>Some representative placeholder content for the third slide.</p>
-            </div>
-          </div>
+          ))}
         </div>
+
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
           <span className="carousel-control-prev-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Previous</span>
@@ -56,16 +62,16 @@ const Home = () => {
           {blogs && blogs.length > 0 ? blogs.map((blog) => (
             <div className="col-md-6 my-5 blog" key={blog._id}>
               <div className="card">
-                <img src={baseball} className="d-block w-100" alt="..." />
+                <img src={blog.image} style={{objectFit:"fill "}} className="" alt="..." />
                 <div className="card-body">
                   <h4 className="card-title">{blog.title && blog.title.length > 60 ? blog.title.substring(0, 60) : blog.title}...</h4>
                   {/* <h4 className="card-title">{blog.title}</h4> */}
                   <p className="card-text">{blog.description && blog.description.length > 255 ? blog.description.substring(0, 255) : blog.description}...</p>
                   {/* <p className="card-text">{blog.description}</p> */}
-                  <a href="#" className="btn btn-dark">Read more</a>
+                  <Link to={`/getBlog/${blog._id}`} className="btn btn-dark">Read more</Link>
                 </div>
                 <div className="card-footer text-muted">
-                  2 days ago
+                  {blog.date}
                 </div>
               </div>
             </div>

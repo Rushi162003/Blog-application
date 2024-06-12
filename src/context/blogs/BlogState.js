@@ -15,7 +15,7 @@ const BlogState = (props) => {
             headers: {
                 "Accept": " */*",
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY1YzVlOGQzYTIwZWQ2ZjAzMjc0NDM0In0sImlhdCI6MTcxNzMyOTU0OX0.l_Iu0oPCVTG5UARIJQOkKNN7b6C2akG2n-rcXRYQYyA",
+                "auth-token": localStorage.getItem('authToken'),
             },
             // body: JSON.stringify(data), // body data type must match "Content-Type" header
         });
@@ -23,7 +23,6 @@ const BlogState = (props) => {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const json = await response.json(); // SyntaxError:  Unexpected token '<', "<!DOCTYPE "... is not valid JSON
-        console.log(json)
         setBlog(json)
     }
 
@@ -33,7 +32,7 @@ const BlogState = (props) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY1YzVlOGQzYTIwZWQ2ZjAzMjc0NDM0In0sImlhdCI6MTcxNzMyOTU0OX0.l_Iu0oPCVTG5UARIJQOkKNN7b6C2akG2n-rcXRYQYyA",
+                "auth-token": localStorage.getItem('authToken'),
             },
             body: JSON.stringify({ title, description, image, tag })
         });
@@ -42,17 +41,45 @@ const BlogState = (props) => {
             "user": "665c5e8d3a20ed6f03274434",
             "title": title,
             "description": description,
-            "image": image, 
+            "image": image,
             "tag": tag,
             "_id": "665fef807ee78eb5903bf05c",
             "__v": 0
         };
         setBlog(blogs.concat(blog))
-        console.log(blog)
     }
 
+    const getSingleBlogId = async (id) => {
+        try{
+        const response = await fetch(`${Host}/api/blog/getBlog/${id}`, {
+            method: "POST",
+            headers: {
+                "Accept": " */*",
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem('authToken'),
+            },
+            // body: JSON.stringify(data), // body data type must match "Content-Type" header
+        });
+    return response.data;
+    }
+    catch(error){
+        console.log(error)
+    }
+
+    };
+
+    // const getSingleBlogId = async (id) => {
+    //     try {
+    //         const response = await fetch(`${Host}/api/getBlog/${id}`);
+    //         return response.data;
+    //     } catch (error) {
+    //         console.error(error);
+    //         return null;
+    //     }
+    // };
+
     return (
-        <BlogContext.Provider value={{ blogs, getBlog, addBlog }}>
+        <BlogContext.Provider value={{ blogs, getBlog, addBlog, getSingleBlogId }}>
             {props.children}
         </BlogContext.Provider>
     )

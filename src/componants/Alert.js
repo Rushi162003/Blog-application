@@ -1,21 +1,22 @@
 import React from 'react'
 
 function Alert(props) {
-    // const cap = (word) =>
-    // {
-    //   const lower = word.toLowerCase();
-    //   return lower.charAt(0).upperCase() + lower.slice(1);
-    // }
+    const cap = (word) =>
+    {
+      if(word === "danger"){
+        word ="error"
+      }
+      const lower = word.toLowerCase();
+      return lower.charAt(0).toUpperCase() + lower.slice(1);
+      
+    }
     return (
-        //     <div style={{height:'70px',}}>
-        //    { props.alert && <div className={`alert alert-success`}role="alert">
-        //     <strong>{props.alert.type1}</strong> {props.alert.msg}
-        //   </div>}
-        //   </div>
-        <div class="alert alert-primary" role="alert">
-            {/* {props.massage} */}
-            This Is alert tags
-           </div>
+            <div style={{height:'70px',}}>
+           { props.alert && <div className={`alert alert-${props.alert.type}`}role="alert">
+            <strong>{cap(props.alert.type)}: </strong> {props.alert.msg}
+          </div>}
+          </div>
+        
     )
 }
 
