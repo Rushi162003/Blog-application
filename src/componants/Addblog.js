@@ -20,6 +20,7 @@ const Addblog = (props) => {
     e.preventDefault();
     addBlog(blog.title, blog.description, blog.image, blog.tag)
     props.showAlert("Blog Added Successfully ", "success")
+    navigate("/")
 
   }
   const onChange = (e) => {
@@ -38,7 +39,7 @@ const Addblog = (props) => {
           <textarea rows={3} type="text" name="image" className="form-control" onChange={onChange} placeholder='Enter your image here....' id="exampleCheck1" />
         </div>
         <div className="mb-3 ">
-          <textarea rows={3} type="text" name="tag" className="form-control" onChange={onChange} placeholder='Enter your image here....' id="exampleCheck1" />
+          <textarea rows={3} type="text" name="tag" className="form-control" onChange={onChange} placeholder='Enter your tag here....' id="exampleCheck1" />
         </div>
         <button type="submit" className="btn btn-primary" onClick={handleClick}>Submit</button>
       </form>

@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import BlogState from './context/blogs/BlogState';
+import Signup from './componants/Signup'
 
 function App() {
   const [alert, setAlert] = useState(null)
@@ -36,6 +37,7 @@ function App() {
               <Route path="/myblog" element={<Myblogs showAlert={showAlert} />} />
               <Route path="/writeblog" element={<Addblog showAlert={showAlert} />} />
               <Route path="/getBlog/:id" element={<Getblog />} />
+              <Route path="/signup" element={<Signup showAlert={showAlert}/>} />
             </Routes>
           </div>
         </Router >

@@ -16,7 +16,7 @@ const Getblog = () => {
         };
         fetchBlog();
     }, [id, getSingleBlogId]);
-
+    
     if (!blog) return <p>Loading...</p>;
 
     return (

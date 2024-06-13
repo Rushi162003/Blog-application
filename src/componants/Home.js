@@ -39,10 +39,6 @@ const Home = () => {
           {blogs.map((blog, index) => (
             <div key={blog._id} style={{ color: "black" }} className={`carousel-item ${index === 0 ? "active" : ""}`}>
               <img src={blog.image} style={{objectFit: "fill"}} className="d-block w-100" alt={blog.title} />
-              <div className="carousel-caption d-none d-md-block">
-                <h5>{blog.title && blog.title.length > 60 ? blog.title.substring(0, 60) : blog.title}...</h5>
-                <p>{blog.description && blog.description.length > 255 ? blog.description.substring(0, 255) : blog.description}...</p>
-              </div>
             </div>
           ))}
         </div>
